@@ -73,7 +73,27 @@ nav button{border-radius:24px;margin:5px;min-height:52px}nav button.on{backgroun
 .dh{margin:16px 0 6px}.tg{width:50px;font:600 12px "JetBrains Mono",monospace;text-align:right}
 summary{list-style:none;padding:12px 4px;font-weight:700;font-size:21px;text-transform:uppercase}summary::-webkit-details-marker{display:none}
 summary::before{content:"▾ ";color:var(--mu)}details:not([open]) summary::before{content:"▸ "}
-.cd2{width:9px;height:9px;border-radius:50%;margin-top:7px;flex:none}</style></head><body><div id="app"></div><div id="rest" hidden></div><nav id="nav"></nav>
+.cd2{width:9px;height:9px;border-radius:50%;margin-top:7px;flex:none}.kgc{border:1px solid #5ec97b77}
+html{-webkit-font-smoothing:antialiased}body{background:radial-gradient(700px 380px at 50% -90px,#5ec97b1f,transparent),#0a0a0a fixed;font-variant-numeric:tabular-nums}
+*{scrollbar-width:none}::-webkit-scrollbar{display:none}
+.card,.rt,.stt{background:linear-gradient(180deg,#181b1a,#121413);border:1px solid #ffffff10;box-shadow:inset 0 1px 0 #ffffff0a,0 10px 28px #0007;border-radius:22px}
+.rt{border-radius:20px}.st{border-radius:14px}
+button{transition:transform .12s,filter .12s}button:active{transform:scale(.96)}.card:active,.rt:active{transform:scale(.99)}
+input:focus,select:focus{outline:2px solid #5ec97b88;outline-offset:0}
+.pri{background:linear-gradient(180deg,#74dc90,#4fbd6c);box-shadow:0 0 0 1px #ffffff22 inset,0 10px 34px #5ec97b4d;border-radius:22px}
+.go{background:linear-gradient(180deg,#74dc90,#4fbd6c);box-shadow:0 6px 18px #5ec97b44}
+nav{background:#111413cc;backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);box-shadow:0 12px 40px #000a,inset 0 1px 0 #ffffff12}
+nav button.on{background:#5ec97b26;color:#7be29a}nav svg{stroke-width:1.8}
+.hd{backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.bar{height:7px}.bar i{box-shadow:0 0 12px #5ec97b99}
+h1{letter-spacing:-.5px;font-size:38px}h2{font-size:15px;margin:24px 2px 10px;letter-spacing:.2px}
+.set.cur{background:linear-gradient(90deg,#5ec97b22,transparent 70%);border-radius:14px;box-shadow:inset 3px 0 0 var(--ac);padding:4px 2px 4px 4px}
+.set:has(.ok.d) .st{opacity:.6}
+.an{animation:inn .3s ease-out}@keyframes inn{from{opacity:0;transform:translateY(10px)}}
+.hero{background:radial-gradient(520px 220px at 50% -30%,#5ec97b3d,transparent),#121513;border:1px solid #5ec97b40;border-radius:28px;padding:22px 16px;text-align:center;box-shadow:0 0 70px #5ec97b1a,inset 0 1px 0 #ffffff12}
+.tri{display:flex;margin-top:18px}.tri>div{flex:1}.big{font:700 54px/1 "Barlow Condensed",sans-serif;letter-spacing:-1px}
+.pill{display:inline-block;padding:5px 12px;border-radius:999px;font:600 12px "JetBrains Mono",monospace;white-space:nowrap}
+</style></head><body><div id="app"></div><div id="rest" hidden></div><nav id="nav"></nav>
 <script>
 const K='muscu_v1',$=id=>document.getElementById(id),uid=()=>Math.random().toString(36).slice(2,9);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -128,7 +148,7 @@ function home(){const n=nextS(),F={};S.ses.forEach(s=>(F[s.f||'']=F[s.f||'']||[]
  +'<div class=lb style="margin:16px 0 2px">Mes dossiers</div>'+Object.keys(F).sort().map(f=>`<details open><summary>${esc(f||'Sans dossier')} <span class=lb>· ${F[f].length} routines</span></summary>${F[f].map(row).join('')}</details>`).join('')}
 function work(){const a=S.act;
  return hdr(a)+cfg()+a.ent.map((e,i)=>{const L=lastOf(e.ex),W=L&&L.filter(s=>s.t!=='e');return `<div class=card><b style="font-size:20px">${esc(e.n)}</b>${e.ss?'<span class=pb>SUPERSET ↓</span>':''}${e.sg?`<span class=pb>↑ +${STEP()} ${U()} suggéré</span>`:''}<div class=mu>Dernière séance : ${W&&W.length?W.map(s=>dsp(s.w)+' '+U()+' × '+s.r).join(' · '):'—'}${prB(e.ex)?` · Record ${dsp(prB(e.ex))} ${U()}`:''}</div>`
- +e.sets.map((s,j)=>{const P=L&&(L[j]||L[L.length-1]);return `<div class=set><button class="bg x${s.t||'t'}" onclick="cyc(${i},${j})">${lab(e.sets,j)}</button>${stp(i,j,'w',dsp(s.w),STEP())}${stp(i,j,'r',s.r,1)}<button class="ok ${s.d?'d':''}" onclick="chk(${i},${j})">${s.d?'✓':''}</button></div>${s.d&&pr(e.ex,s)?`<div class=rc>🏆 RECORD ${dsp(s.w)} ${U()} × ${s.r}</div>`:''}<div class=sub><span class=lb style="flex:1">Prev ${P?dsp(P.w)+'×'+P.r:'—'} · repos ${fmt(s.rt||S.rest)}</span><button class=gp onclick="S.act.ent[${i}].sets[${j}].o=${s.o?0:1};save();render()">${s.o?'▴':'⋯'}</button></div>${s.o?`<div class=sub>${sel(i,j,'rt',RT.map(v=>[v,'Repos '+v+' s']),s.rt||S.rest)}${sel(i,j,'df',DF,s.df||0)}${sel(i,j,'ri',RI,s.ri==null?-1:s.ri)}</div>`:''}`}).join('')
+ +`<div class="set lb" style="margin-bottom:0"><span>Série</span><span style="text-align:center">Poids (${U()})</span><span style="text-align:center">Reps</span><span></span></div>`+e.sets.map((s,j)=>{const P=L&&(L[j]||L[L.length-1]);return `<div class=set><button class="bg x${s.t||'t'}" onclick="cyc(${i},${j})">${lab(e.sets,j)}</button>${stp(i,j,'w',dsp(s.w),STEP())}${stp(i,j,'r',s.r,1)}<button class="ok ${s.d?'d':''}" onclick="chk(${i},${j})">${s.d?'✓':''}</button></div>${s.d&&pr(e.ex,s)?`<div class=rc>🏆 RECORD ${dsp(s.w)} ${U()} × ${s.r}</div>`:''}<div class=sub><span class=lb style="flex:1">Prev ${P?dsp(P.w)+'×'+P.r:'—'} · ⏱ repos ${fmt(s.rt||S.rest)}</span><button class=gp onclick="S.act.ent[${i}].sets[${j}].o=${s.o?0:1};save();render()">${s.o?'▴':'⋯'}</button></div>${s.o?`<div class=sub>${sel(i,j,'rt',RT.map(v=>[v,'Repos '+v+' s']),s.rt||S.rest)}${sel(i,j,'df',DF,s.df||0)}${sel(i,j,'ri',RI,s.ri==null?-1:s.ri)}</div>`:''}`}).join('')
  +`<div class=row><button style="flex:1" onclick="addSet(${i})">+ Série</button><button onclick="delSet(${i})">−</button>${e.sets[0].t!=='e'&&e.sets.some(s=>s.w>0)?`<button onclick="wu(${i})">Échauffement</button>`:''}</div></div>`}).join('')
  +addBlock()+`<div class="mu" style="margin-bottom:10px">Touche le rond à gauche : É échauffement · numéro = série de travail · D dégressive</div><button class=pri onclick="fin()">Terminer et sauvegarder</button><button class="dng w" onclick="conf('ab',()=>{S.act=null;rStop();save();go('home')})">${AR==='ab'?'Confirmer l’abandon ?':'Abandonner la séance'}</button>`}
 function ses(){return home()}
@@ -149,6 +169,17 @@ function hist(){const M=V.mo||0,hm=d=>d.toLocaleTimeString('fr-FR',{hour:'2-digi
   o+=`<div class=rt style="--c:var(--ac)" onclick="go('hdet','${h.id}')"><i></i><div style="flex:1"><b>${esc(h.n)}</b>${np?`<span class=pb>+${np} PR</span>`:''}<div class=lb style="text-transform:none">${h.dur?hm(new Date(h.t-h.dur*1000))+' → '+hm(new Date(h.t))+' · '+Math.round(h.dur/60)+' min · ':''}${ns} sets · ${vf(h.ent)}</div></div></div>`});
  return `<div class=row style="margin-bottom:8px"><button class=gp onclick="V.mo=${M-1};render()">‹</button><h1 style="flex:1;text-align:center;margin:0">${d0.toLocaleDateString('fr-FR',{month:'long'})} <small class=lb>${y}</small></h1><button class=gp onclick="V.mo=${M+1};render()">›</button></div><div class=cal>${'LMMJVSD'.split('').map(x=>`<span class=lb>${x}</span>`).join('')}${cells}</div>`
  +`<div class=row style="margin:14px 0">${[[nw,'Cette semaine'],[nm,'Ce mois'],[prs(),'PR · 30 j']].map(([v,l],i)=>`<div class=card style="flex:1;margin:0;padding:12px"><b style="font-size:30px;font-family:'Barlow Condensed',sans-serif;color:${i==2?'#b9a2ff':'inherit'}">${v}</b><div class=lb>${l}</div></div>`).join('')}</div>`+(o||'<div class="card mu">Termine une séance pour la retrouver ici.</div>')}
+function bil(){const h=S.hist.find(x=>x.id===V.x);if(!h)return home();
+ const i=S.hist.indexOf(h),bf=S.hist.slice(0,i),pv=h.sid&&[...bf].reverse().find(x=>x.sid===h.sid),v=vol(h.ent),dv=pv&&vol(pv.ent)?Math.round((v/vol(pv.ent)-1)*100):null,sc=s=>s.w?e1(s):s.r,
+ w0=new Date(h.t),np=h.ent.reduce((a,e)=>a+e.sets.filter(s=>s.pr).length,0);w0.setHours(0,0,0,0);w0.setDate(w0.getDate()-(w0.getDay()+6)%7);
+ const rows=h.ent.map(e=>{const w=e.sets.filter(s=>s.t!=='e');if(!w.length)return '';const b=w.reduce((m,s)=>sc(s)>sc(m)?s:m);let pb=0;
+  bf.forEach(x=>x.ent.forEach(y=>{if(y.ex===e.ex)y.sets.forEach(s=>{if(s.t!=='e')pb=Math.max(pb,sc(s))})}));
+  const d=pb&&sc(b)?Math.round((sc(b)/pb-1)*100):null,c=d==null||d===0?'var(--mu)':d>0?'#5ec97b':'#e5605a';
+  return `<div class=rt style="--c:${c}"><i></i><div style="flex:1"><b>${esc(e.n)}${e.sets.some(s=>s.pr)?' 🏆':''}</b><div class=lb style="text-transform:none">${w.length} séries · meilleure ${dsp(b.w)} ${U()} × ${b.r}</div></div><span class=pill style="color:${c};background:${d>0?'#5ec97b1f':'#ffffff0d'}">${d==null?'nouveau':d>0?'↑ +'+d+' %':d<0?'↓ '+Math.abs(d)+' %':'= stable'}</span></div>`}).join('');
+ return `<div class=hero><div class=lb style="color:var(--ac)">● Séance terminée</div><h1 style="margin:6px 0 2px">${esc(h.n)}</h1><div class=mu>${fd(h.t,1)} · ${bf.filter(x=>x.t>=w0).length+1}e séance cette semaine</div>`
+ +`<div class=tri><div><div class=big>${h.dur?Math.round(h.dur/60):'—'}</div><div class=lb>min</div></div><div><div class=big>${Math.round(dsp(v))}</div><div class=lb>${U()} soulevés</div></div><div><div class=big>${h.ent.reduce((a,e)=>a+e.sets.length,0)}</div><div class=lb>séries</div></div></div>`
+ +`<div style="margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">${dv==null?'':`<span class=pill style="color:${dv>=0?'#5ec97b':'#e5605a'};background:#ffffff0d">${dv>=0?'↑ +'+dv:'↓ '+Math.abs(dv)} % de volume vs dernière séance</span>`}${np?`<span class=pill style="color:#b9a2ff;background:#a78bfa22">🏆 ${np} record${np>1?'s':''}</span>`:''}</div></div>`
+ +'<h2>Exercice par exercice</h2>'+rows+`<button class=pri style="margin-top:10px" onclick="go('home')">Terminé</button><button class=w onclick="go('hdet','${h.id}')">Voir le détail des séries</button>`}
 function hdet(){const h=S.hist.find(x=>x.id===V.x);if(!h)return hist();
  return `<button onclick="go('hist')">← Retour</button><h1 style="margin-top:12px">${esc(h.n)}</h1><div class=mu style="margin:-8px 0 12px">${fd(h.t,1)} · ${vf(h.ent)}${h.dur?' · '+Math.round(h.dur/60)+' min':''}</div>`
  +h.ent.map(e=>`<div class=card><b>${esc(e.n)}</b>${e.sets.map(s=>`<div style="padding:7px 0"><span style="font-size:18px">${TL[s.t]?`<span class=mu>${TL[s.t]}</span> `:''}${dsp(s.w)} ${U()} × ${s.r}${s.pr?' 🏆':''}</span><div class=mu>${[s.rt&&'repos '+s.rt+' s',s.df&&DF[s.df][1],s.ri>=0&&RI[s.ri+1][1]].filter(Boolean).join(' · ')}</div></div>`).join('')}</div>`).join('')
@@ -172,13 +203,15 @@ opt=(a,c)=>a.map(([v,l])=>`<option value="${v}" ${v===c?'selected':''}>${l}</opt
 sel=(i,j,f,o,c)=>`<select onchange="sf(${i},${j},'${f}',+this.value)">${opt(o,c)}</select>`,
 cfg=()=>`<div class=card><div class=row><span style="flex:1">Unité de poids</span><select style="width:110px" onchange="setU(this.value)">${opt([['kg','kg'],['lb','lb']],S.u)}</select></div><div class=row style="margin-top:8px"><span style="flex:1">Repos par défaut</span><select style="width:110px" onchange="setR(+this.value)">${opt(RT.map(v=>[v,v+' s']),S.rest)}</select></div></div>`,
 lab=(a,j)=>{const t=a[j].t||'t';return t==='e'?'É':t==='d'?'D':a.slice(0,j+1).filter(x=>(x.t||'t')==='t').length},
-stp=(i,j,f,v,d)=>`<div class=st><button onclick="adj(${i},${j},'${f}',-${d})">−</button><input id="${f}${i}_${j}" type=number inputmode=decimal step=any value="${v}" oninput="setv(${i},${j},'${f}',this.value)"><button onclick="adj(${i},${j},'${f}',${d})">+</button></div>`,
+stp=(i,j,f,v,d)=>`<div class="st ${f==='w'?'kgc':''}"><button onclick="adj(${i},${j},'${f}',-${d})">−</button><input id="${f}${i}_${j}" type=text inputmode=${f==='w'?'decimal':'numeric'} onfocus="setTimeout(()=>this.select(),0)" value="${v}" oninput="setv(${i},${j},'${f}',this.value)"><button onclick="adj(${i},${j},'${f}',${d})">+</button></div>`,
 exForm=()=>`<h2>Créer mon exercice</h2><input id=nx placeholder="Nom (ex. Curl incliné)"><div class=row style="margin:8px 0"><select id=ng>${GR.map(g=>`<option>${g}</option>`).join('')}</select><select id=ne>${EQ.map(g=>`<option>${g}</option>`).join('')}</select></div><button onclick="addEx()" style="width:100%">Créer l’exercice</button>`;
 /* ---- actions ---- */
-function adj(i,j,f,d){const s=S.act.ent[i].sets[j];if(f==='w')s.w=Math.max(0,kg(dsp(s.w)+d));else s.r=Math.max(0,s.r+d);$(f+i+'_'+j).value=f==='w'?dsp(s.w):s.r;save()}
-function setv(i,j,f,v){const p=Math.max(0,parseFloat(String(v).replace(',','.'))||0);S.act.ent[i].sets[j][f]=f==='w'?kg(p):p;save()}
+function adj(i,j,f,d){const s=S.act.ent[i].sets[j];if(f==='w'){s.w=Math.max(0,kg(dsp(s.w)+d));s.m=1;prop(i,j)}else s.r=Math.max(0,s.r+d);$(f+i+'_'+j).value=f==='w'?dsp(s.w):s.r;save();uv()}
+function setv(i,j,f,v){const p=Math.max(0,parseFloat(String(v).replace(',','.'))||0),s=S.act.ent[i].sets[j];s[f]=f==='w'?kg(p):p;if(f==='w'&&String(v).trim()!==''){s.m=1;prop(i,j)}save();uv()}
+function prop(i,j){const a=S.act.ent[i].sets,s=a[j];if(s.t==='d')return;for(let k=j+1;k<a.length;k++){const n=a[k];if(n.d||n.m||n.t!==s.t)break;n.w=s.w;const el=$('w'+i+'_'+k);if(el)el.value=dsp(n.w)}}
+function uv(){const a=S.act;if(!a)return;const v=a.ent.flatMap(e=>e.sets).reduce((x,s)=>x+(s.d&&s.t!=='e'?s.w*s.r:0),0),el=$('vl');if(el)el.innerHTML=Math.round(dsp(v))+' <small>'+U()+'</small>'}
 function sf(i,j,f,v){S.act.ent[i].sets[j][f]=v;save()}
-function chk(i,j){const s=S.act.ent[i].sets[j];s.d=s.d?0:1;save();render();if(s.d&&!S.act.ent[i].ss)startRest(s.rt)}
+function chk(i,j){const s=S.act.ent[i].sets[j];s.d=s.d?0:1;if(s.d)prop(i,j);save();render();if(s.d&&!S.act.ent[i].ss)startRest(s.rt)}
 function addId(id){cur().it.push({ex:id,s:['t','t','t']});save();render()}
 function bilan(){const H=S.hist.filter(h=>h.t>Date.now()-2592e6),g={},by={},L=['Bilan musculation, 30 derniers jours (poids en '+U()+')','Séances : '+H.length];
  H.forEach(h=>h.ent.forEach(e=>{const x=XN(e.ex),w=e.sets.filter(s=>s.t!=='e');w.forEach(()=>{g[x.g]=(g[x.g]||0)+1});const q=w.filter(s=>s.w>0);if(q.length){const b=q.reduce((m,s)=>e1(s)>e1(m)?s:m);(by[e.n]=by[e.n]||[]).push(dsp(b.w)+'×'+b.r)}}));
@@ -191,7 +224,7 @@ function addSet(i){const a=S.act.ent[i].sets,l=a[a.length-1];a.push({w:l.w,r:l.r
 function delSet(i){const a=S.act.ent[i].sets;if(a.length>1){a.pop();save();render()}}
 function fin(){const a=S.act,ent=a.ent.map(e=>({ex:e.ex,n:e.n,sets:e.sets.filter(s=>s.d).map(s=>({...s,d:1,pr:pr(e.ex,s)?1:0}))})).filter(e=>e.sets.length);
  if(!ent.length)return conf('ab',()=>{S.act=null;rStop();save();go('home')});
- const id=uid();S.hist.push({id,sid:a.sid,n:a.n,t:Date.now(),dur:Math.round((Date.now()-a.t)/1000),ent});S.act=null;rStop();save();go('hdet',id)}
+ const id=uid();S.hist.push({id,sid:a.sid,n:a.n,t:Date.now(),dur:Math.round((Date.now()-a.t)/1000),ent});S.act=null;rStop();save();go('bil',id)}
 function startEmpty(){S.act={sid:'',n:'Séance libre',t:Date.now(),ent:[]};save();go('work')}
 function newS(){const s={id:uid(),n:'Nouvelle séance',it:[]};S.ses.push(s);save();go('edit',s.id)}
 function addEx(){const v=$('nx').value.trim();if(!v)return;const e={id:uid(),n:v,g:$('ng').value,eq:$('ne').value,c:1};S.ex.push(e);if(V.p==='edit')cur().it.push({ex:e.id,s:['t','t','t']});save();render()}
@@ -212,7 +245,7 @@ bst=ex=>{const b={w:0,e:0,r:0};S.hist.forEach(h=>h.ent.forEach(e=>{if(e.ex===ex)
 pr=(ex,s)=>{if(s.t==='e')return 0;const b=bst(ex);if(!(b.w||b.r))return 0;return s.w?(b.w>0?(s.w>b.w+.001||e1(s)>b.e+.5):true):(b.r>0&&s.r>b.r)},
 prs=()=>S.hist.filter(h=>h.t>Date.now()-2592e6).reduce((a,h)=>a+h.ent.filter(e=>e.sets.some(s=>s.pr)).length,0),
 dots=()=>{let o='<div class=row style="justify-content:space-between;margin-bottom:12px">';for(let i=6;i>=0;i--){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-i);const a=d.getTime();o+=`<div class="dy ${S.hist.some(h=>h.t>=a&&h.t<a+864e5)?'on':''}">${d.toLocaleDateString('fr-FR',{weekday:'narrow'})}</div>`}return o+'</div>'},
-hdr=a=>{const all=a.ent.flatMap(e=>e.sets),dn=all.filter(s=>s.d),v=dn.reduce((x,s)=>x+(s.t!=='e'?s.w*s.r:0),0);return `<div class=hd><div class=lb style="color:var(--ac)">● Live · maintenant</div><b class=ttl>${esc(a.n)}</b><div class=stt><div><span class=lb>Temps</span><b id=el class=tm></b></div><div><span class=lb>Volume</span><b>${Math.round(dsp(v))} <small>${U()}</small></b></div><div><span class=lb>Sets</span><b>${dn.length} / ${all.length}</b></div></div><div class=bar><i style="width:${all.length?dn.length*100/all.length:0}%"></i></div></div>`},
+hdr=a=>{const all=a.ent.flatMap(e=>e.sets),dn=all.filter(s=>s.d),v=dn.reduce((x,s)=>x+(s.t!=='e'?s.w*s.r:0),0);return `<div class=hd><div class=lb style="color:var(--ac)">● Live · maintenant</div><b class=ttl>${esc(a.n)}</b><div class=stt><div><span class=lb>Temps</span><b id=el class=tm></b></div><div><span class=lb>Volume</span><b id=vl>${Math.round(dsp(v))} <small>${U()}</small></b></div><div><span class=lb>Sets</span><b>${dn.length} / ${all.length}</b></div></div><div class=bar><i style="width:${all.length?dn.length*100/all.length:0}%"></i></div></div>`},
 fr=s=>`<div class=row style="margin-bottom:10px"><input list=fl placeholder="Dossier (ex. Phase 3)" value="${esc(s.f||'')}" onchange="cur().f=this.value.trim();save()"><datalist id=fl>${[...new Set(S.ses.map(x=>x.f).filter(Boolean))].map(f=>`<option value="${esc(f)}">`).join('')}</datalist><button onclick="cur().c=((cur().c||0)+1)%6;save();render()" style="background:${COL[(s.c||0)%6]};width:54px"></button></div>`,
 nxt=()=>{for(const e of S.act.ent){const j=e.sets.findIndex(s=>!s.d);if(j>=0)return `Suivant · ${esc(e.n)} · S${j+1}`}return 'Dernière série !'},
 XN=id=>S.ex.find(e=>e.id===id)||{},
@@ -266,10 +299,10 @@ function tick(){const el=$('el');if(el&&S.act)el.textContent=fmt((Date.now()-S.a
 function beep(){try{navigator.vibrate&&navigator.vibrate([300,100,300]);const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.frequency.value=880;g.gain.value=.25;o.start();o.stop(AC.currentTime+.5)}catch(e){}}
 setInterval(tick,250);
 /* ---- rendu ---- */
-function render(top){const y=scrollY,p=V.p,t={home:'home',work:'home',ses:'home',edit:'home',hist:'hist',hdet:'hist',prog:'prog',prof:'prof'}[p];
- $('app').innerHTML={home,work,ses,edit,hist,hdet,prog,prof}[p]();
+function render(top){const y=scrollY,p=V.p,t={home:'home',work:'home',ses:'home',edit:'home',hist:'hist',hdet:'hist',prog:'prog',prof:'prof',bil:'home'}[p];
+ $('app').innerHTML={home,work,ses,edit,hist,hdet,prog,prof,bil}[p]();
  $('nav').innerHTML=[['home','Routines'],['hist','Activité'],['prog','Stats'],['prof','Profil']].map(([k,l])=>`<button class="${k===t?'on':''}" onclick="go('${k}')">${IC[k]}${l}</button>`).join('');
- $('rest').style.visibility=p==='work'?'visible':'hidden';wk(p==='work');scrollTo(0,top?0:y)}
+ $('rest').style.visibility=p==='work'?'visible':'hidden';wk(p==='work');if(p==='work'){const q=document.querySelector('#app .ok:not(.d)');if(q)q.parentElement.classList.add('cur')}scrollTo(0,top?0:y);if(top){const a=$('app');a.classList.remove('an');void a.offsetWidth;a.classList.add('an')}}
 render();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script></body></html>
